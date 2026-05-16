@@ -8,24 +8,24 @@
 
 <style>
 
-/* 
-   ESTILO GENERAL
- */
+/* ESTILO GENERAL */
 
 body{
     font-family: Arial, sans-serif;
-    background: linear-gradient(to right,#1e3c72,#8B5CF6);
+    background: linear-gradient(to right,#1e3c72,#2a5298);
     color:white;
     text-align:center;
     margin:0;
 }
 
 /* TÍTULO */
+
 h1{
     margin-top:20px;
 }
 
-/* CONTENEDOR PRINCIPAL */
+/* CONTENEDOR */
+
 .contenedor{
     width:85%;
     margin:auto;
@@ -36,16 +36,18 @@ h1{
 }
 
 /* INPUTS */
+
 input,select{
     padding:10px;
     margin:10px;
     border-radius:10px;
     border:none;
-    width:160px;
+    width:170px;
     text-align:center;
 }
 
 /* BOTÓN */
+
 button{
     padding:10px 20px;
     border:none;
@@ -57,12 +59,14 @@ button{
 }
 
 /* EFECTO BOTÓN */
+
 button:hover{
     background:#0072ff;
     transform:scale(1.05);
 }
 
 /* RESULTADO */
+
 #resultado{
     margin-top:20px;
     font-size:24px;
@@ -70,12 +74,14 @@ button:hover{
 }
 
 /* PROCEDIMIENTO */
+
 #procedimiento{
     margin-top:15px;
     font-size:18px;
 }
 
-/* TEXTO DE FRICCIÓN */
+/* FRICCIÓN */
+
 #estadoFriccion{
     margin-top:20px;
     font-size:22px;
@@ -83,9 +89,7 @@ button:hover{
     color:yellow;
 }
 
-/* 
-   ESCENA DE ANIMACIÓN
- */
+/* ESCENA */
 
 .escena{
     margin-top:30px;
@@ -98,6 +102,7 @@ button:hover{
 }
 
 /* SUELO */
+
 .suelo{
     position:absolute;
     bottom:0;
@@ -107,6 +112,7 @@ button:hover{
 }
 
 /* CAJA */
+
 .caja{
     position:absolute;
     width:80px;
@@ -126,9 +132,7 @@ button:hover{
     color:white;
 }
 
-/* 
-   DIAGRAMA
- */
+/* CANVAS */
 
 #diagrama{
     background:white;
@@ -147,7 +151,6 @@ button:hover{
 
 <h2>¿Qué deseas calcular?</h2>
 
-<!-- SELECTOR -->
 <select id="tipo">
 
     <option value="fuerza">
@@ -166,25 +169,21 @@ button:hover{
 
 <br>
 
-<!-- INPUT MASA -->
 <input
 type="number"
 id="masa"
 placeholder="Masa (kg)">
 
-<!-- INPUT ACELERACIÓN -->
 <input
 type="number"
 id="aceleracion"
 placeholder="Aceleración (m/s²)">
 
-<!-- INPUT FUERZA -->
 <input
 type="number"
 id="fuerza"
 placeholder="Fuerza (N)">
 
-<!-- INPUT FRICCIÓN -->
 <input
 type="number"
 id="friccion"
@@ -192,39 +191,29 @@ placeholder="Coeficiente fricción">
 
 <br><br>
 
-<!-- BOTÓN -->
 <button onclick="resolver()">
 Resolver
 </button>
 
-<!-- RESULTADO -->
 <div id="resultado"></div>
 
-<!-- PROCEDIMIENTO -->
 <div id="procedimiento"></div>
 
-<!-- MENSAJE FRICCIÓN -->
 <div id="estadoFriccion"></div>
 
-<!-- 
-     ESCENA
- -->
+<!-- ESCENA -->
 
 <div class="escena">
 
-    <!-- CAJA -->
     <div class="caja" id="caja">
         Caja
     </div>
 
-    <!-- SUELO -->
     <div class="suelo"></div>
 
 </div>
 
-<!--
-     DIAGRAMA DE CUERPO LIBRE
- -->
+<!-- DIAGRAMA -->
 
 <canvas
 id="diagrama"
@@ -236,64 +225,48 @@ height="350">
 
 <script>
 
-/* 
-   FUNCIÓN PARA MOVER LA CAJA
-*/
+/* MOVER OBJETO */
 
 function moverObjeto(fuerzaNeta){
 
-    // Obtener caja
     let caja =
     document.getElementById("caja");
 
-    // Distancia basada en fuerza
     let distancia =
     fuerzaNeta * 8;
 
-    // Limitar distancia mínima
     if(distancia < 0){
         distancia = 0;
     }
 
-    // Limitar distancia máxima
     if(distancia > 950){
         distancia = 950;
     }
 
-    // Mover caja
     caja.style.left =
     distancia + "px";
 }
 
-/*
-   FUNCIÓN PARA MOSTRAR ESTADO DE FRICCIÓN
- */
+/* MOSTRAR FRICCIÓN */
 
 function mostrarFriccion(mu){
 
     let estado =
     document.getElementById("estadoFriccion");
 
-    // Si hay fricción
     if(mu > 0){
 
         estado.innerHTML =
         "⚠ Hay fricción en la superficie";
 
-    }
-
-    // Si NO hay fricción
-    else{
+    }else{
 
         estado.innerHTML =
         "No hay fricción";
-
     }
 }
 
-/* 
-   FUNCIÓN DIAGRAMA DE CUERPO LIBRE
- */
+/* DIAGRAMA */
 
 function dibujarDiagrama(
     fuerza,
@@ -301,15 +274,12 @@ function dibujarDiagrama(
     masa
 ){
 
-    // Obtener canvas
     let canvas =
     document.getElementById("diagrama");
 
-    // Obtener contexto
     let ctx =
     canvas.getContext("2d");
 
-    // Limpiar canvas
     ctx.clearRect(
         0,
         0,
@@ -317,7 +287,6 @@ function dibujarDiagrama(
         canvas.height
     );
 
-    // Fondo blanco
     ctx.fillStyle = "white";
 
     ctx.fillRect(
@@ -327,9 +296,7 @@ function dibujarDiagrama(
         canvas.height
     );
 
-    //
-    // DIBUJAR CAJA
-    // 
+    /* CAJA */
 
     ctx.fillStyle = "crimson";
 
@@ -340,21 +307,17 @@ function dibujarDiagrama(
         100
     );
 
-    // Texto
     ctx.font = "20px Arial";
 
     ctx.fillStyle = "black";
 
-    // Masa
     ctx.fillText(
         masa.toFixed(1) + " kg",
         270,
         175
     );
 
-    // 
-    // FUERZA NORMAL
-    // 
+    /* NORMAL */
 
     ctx.beginPath();
 
@@ -364,7 +327,6 @@ function dibujarDiagrama(
 
     ctx.stroke();
 
-    // Flecha
     ctx.beginPath();
 
     ctx.moveTo(300,40);
@@ -375,16 +337,13 @@ function dibujarDiagrama(
 
     ctx.fill();
 
-    // Texto
     ctx.fillText(
         "Normal",
         320,
         55
     );
 
-    // 
-    // PESO
-    //
+    /* PESO */
 
     ctx.beginPath();
 
@@ -394,7 +353,6 @@ function dibujarDiagrama(
 
     ctx.stroke();
 
-    // Flecha
     ctx.beginPath();
 
     ctx.moveTo(300,310);
@@ -405,16 +363,13 @@ function dibujarDiagrama(
 
     ctx.fill();
 
-    // Texto
     ctx.fillText(
         "Peso",
         320,
         300
     );
 
-    // 
-    // FUERZA APLICADA
-    // 
+    /* FUERZA */
 
     ctx.beginPath();
 
@@ -424,7 +379,6 @@ function dibujarDiagrama(
 
     ctx.stroke();
 
-    // Flecha
     ctx.beginPath();
 
     ctx.moveTo(500,170);
@@ -435,7 +389,6 @@ function dibujarDiagrama(
 
     ctx.fill();
 
-    // Texto
     ctx.fillText(
         "F = " +
         fuerza.toFixed(1) +
@@ -444,9 +397,7 @@ function dibujarDiagrama(
         150
     );
 
-    //
-    // FRICCIÓN
-    // 
+    /* FRICCIÓN */
 
     ctx.beginPath();
 
@@ -456,7 +407,6 @@ function dibujarDiagrama(
 
     ctx.stroke();
 
-    // Flecha
     ctx.beginPath();
 
     ctx.moveTo(100,170);
@@ -467,7 +417,6 @@ function dibujarDiagrama(
 
     ctx.fill();
 
-    // Texto
     ctx.fillText(
         "Ff = " +
         friccion.toFixed(1) +
@@ -477,58 +426,48 @@ function dibujarDiagrama(
     );
 }
 
-/* 
-   FUNCIÓN PRINCIPAL
-*/
+/* FUNCIÓN PRINCIPAL */
 
 function resolver(){
 
-    // Tipo seleccionado
     let tipo =
     document.getElementById("tipo").value;
 
-    // Masa
     let m =
     parseFloat(
         document.getElementById("masa").value
     );
 
-    // Aceleración
     let a =
     parseFloat(
         document.getElementById("aceleracion").value
     );
 
-    // Fuerza
     let f =
     parseFloat(
         document.getElementById("fuerza").value
     );
 
-    // Coeficiente de fricción
     let mu =
     parseFloat(
         document.getElementById("friccion").value
     ) || 0;
 
-    // Resultado
     let resultado =
     document.getElementById("resultado");
 
-    // Procedimiento
     let proc =
     document.getElementById("procedimiento");
 
-    // Mostrar si hay fricción
+    resultado.innerHTML = "";
+    proc.innerHTML = "";
+
     mostrarFriccion(mu);
 
-    /* 
-       CALCULAR ACELERACIÓN
-   */
+    /* CALCULAR ACELERACIÓN */
 
     if(tipo === "aceleracion"){
 
-        // Validación
         if(isNaN(f) || isNaN(m)){
 
             resultado.innerHTML =
@@ -537,15 +476,12 @@ function resolver(){
             return;
         }
 
-        // Calcular fricción
         let fuerzaFriccion =
         mu * m * 9.8;
 
-        // Fuerza neta
         let fuerzaNeta =
         f - fuerzaFriccion;
 
-        // Verificar movimiento
         if(fuerzaNeta <= 0){
 
             resultado.innerHTML =
@@ -562,17 +498,14 @@ function resolver(){
             return;
         }
 
-        // Segunda ley de Newton
         let aceleracion =
         fuerzaNeta / m;
 
-        // Mostrar resultado
         resultado.innerHTML =
         "Aceleración = " +
         aceleracion.toFixed(2) +
         " m/s²";
 
-        // Procedimiento
         proc.innerHTML =
 
         "Fricción = μ × m × g = " +
@@ -586,10 +519,8 @@ function resolver(){
         "a = Fn / m = " +
         aceleracion.toFixed(2);
 
-        // Mover caja
         moverObjeto(fuerzaNeta);
 
-        // Dibujar diagrama
         dibujarDiagrama(
             f,
             fuerzaFriccion,
@@ -597,6 +528,122 @@ function resolver(){
         );
     }
 
+    /* CALCULAR FUERZA */
+
+    if(tipo === "fuerza"){
+
+        if(isNaN(m) || isNaN(a)){
+
+            resultado.innerHTML =
+            "Ingrese masa y aceleración";
+
+            return;
+        }
+
+        let fuerzaBase =
+        m * a;
+
+        let fuerzaFriccion =
+        mu * m * 9.8;
+
+        let fuerzaTotal =
+        fuerzaBase + fuerzaFriccion;
+
+        resultado.innerHTML =
+        "Fuerza = " +
+        fuerzaTotal.toFixed(2) +
+        " N";
+
+        proc.innerHTML =
+
+        "F = m × a<br><br>" +
+
+        "F = " + m +
+        " × " + a +
+        "<br><br>" +
+
+        "Fuerza base = " +
+        fuerzaBase.toFixed(2) +
+        " N<br><br>" +
+
+        "Fricción = μ × m × g = " +
+        fuerzaFriccion.toFixed(2) +
+        " N<br><br>" +
+
+        "F total = " +
+        fuerzaBase.toFixed(2) +
+        " + " +
+        fuerzaFriccion.toFixed(2) +
+        "<br><br>" +
+
+        "F = " +
+        fuerzaTotal.toFixed(2) +
+        " N";
+
+        moverObjeto(fuerzaTotal);
+
+        dibujarDiagrama(
+            fuerzaTotal,
+            fuerzaFriccion,
+            m
+        );
+    }
+
+    /* CALCULAR MASA */
+
+    if(tipo === "masa"){
+
+        if(isNaN(f) || isNaN(a)){
+
+            resultado.innerHTML =
+            "Ingrese fuerza y aceleración";
+
+            return;
+        }
+
+        if(a === 0){
+
+            resultado.innerHTML =
+            "La aceleración no puede ser 0";
+
+            return;
+        }
+
+        let masa =
+        f / a;
+
+        let fuerzaFriccion =
+        mu * masa * 9.8;
+
+        resultado.innerHTML =
+        "Masa = " +
+        masa.toFixed(2) +
+        " kg";
+
+        proc.innerHTML =
+
+        "m = F / a<br><br>" +
+
+        "m = " + f +
+        " / " + a +
+        "<br><br>" +
+
+        "m = " +
+        masa.toFixed(2) +
+        " kg<br><br>" +
+
+        "Fricción = μ × m × g = " +
+        fuerzaFriccion.toFixed(2) +
+        " N";
+
+        moverObjeto(f);
+
+        dibujarDiagrama(
+            f,
+            fuerzaFriccion,
+            masa
+        );
+    }
 }
 
 </script>
