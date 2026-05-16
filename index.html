@@ -8,9 +8,9 @@
 
 <style>
 
-/* =========================
+/* 
    ESTILO GENERAL
-========================= */
+ */
 
 body{
     font-family: Arial, sans-serif;
@@ -83,9 +83,9 @@ button:hover{
     color:yellow;
 }
 
-/* =========================
+/* 
    ESCENA DE ANIMACIÓN
-========================= */
+ */
 
 .escena{
     margin-top:30px;
@@ -126,9 +126,9 @@ button:hover{
     color:white;
 }
 
-/* =========================
+/* 
    DIAGRAMA
-========================= */
+ */
 
 #diagrama{
     background:white;
@@ -206,9 +206,9 @@ Resolver
 <!-- MENSAJE FRICCIÓN -->
 <div id="estadoFriccion"></div>
 
-<!-- =========================
+<!-- 
      ESCENA
-========================= -->
+ -->
 
 <div class="escena">
 
@@ -222,9 +222,9 @@ Resolver
 
 </div>
 
-<!-- =========================
+<!--
      DIAGRAMA DE CUERPO LIBRE
-========================= -->
+ -->
 
 <canvas
 id="diagrama"
@@ -236,9 +236,9 @@ height="350">
 
 <script>
 
-/* =========================================
+/* 
    FUNCIÓN PARA MOVER LA CAJA
-========================================= */
+*/
 
 function moverObjeto(fuerzaNeta){
 
@@ -265,9 +265,9 @@ function moverObjeto(fuerzaNeta){
     distancia + "px";
 }
 
-/* =========================================
+/*
    FUNCIÓN PARA MOSTRAR ESTADO DE FRICCIÓN
-========================================= */
+ */
 
 function mostrarFriccion(mu){
 
@@ -291,9 +291,9 @@ function mostrarFriccion(mu){
     }
 }
 
-/* =========================================
+/* 
    FUNCIÓN DIAGRAMA DE CUERPO LIBRE
-========================================= */
+ */
 
 function dibujarDiagrama(
     fuerza,
@@ -327,9 +327,9 @@ function dibujarDiagrama(
         canvas.height
     );
 
-    // =========================
+    //
     // DIBUJAR CAJA
-    // =========================
+    // 
 
     ctx.fillStyle = "crimson";
 
@@ -352,9 +352,9 @@ function dibujarDiagrama(
         175
     );
 
-    // =========================
+    // 
     // FUERZA NORMAL
-    // =========================
+    // 
 
     ctx.beginPath();
 
@@ -382,9 +382,9 @@ function dibujarDiagrama(
         55
     );
 
-    // =========================
+    // 
     // PESO
-    // =========================
+    //
 
     ctx.beginPath();
 
@@ -412,9 +412,9 @@ function dibujarDiagrama(
         300
     );
 
-    // =========================
+    // 
     // FUERZA APLICADA
-    // =========================
+    // 
 
     ctx.beginPath();
 
@@ -444,9 +444,9 @@ function dibujarDiagrama(
         150
     );
 
-    // =========================
+    //
     // FRICCIÓN
-    // =========================
+    // 
 
     ctx.beginPath();
 
@@ -477,9 +477,9 @@ function dibujarDiagrama(
     );
 }
 
-/* =========================================
+/* 
    FUNCIÓN PRINCIPAL
-========================================= */
+*/
 
 function resolver(){
 
@@ -522,9 +522,9 @@ function resolver(){
     // Mostrar si hay fricción
     mostrarFriccion(mu);
 
-    /* =====================================
+    /* 
        CALCULAR ACELERACIÓN
-    ===================================== */
+   */
 
     if(tipo === "aceleracion"){
 
